@@ -1,0 +1,21 @@
+{
+  "name": "ptec-cypress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@faker-js/faker": "^9.9.0",
+    "axe-core": "^4.11.3",
+    "cypress": "^15.13.1",
+    "cypress-axe": "^1.7.0",
+    "cypress-plugin-tab": "^2.0.0",
+    "cypress-real-events": "^1.15.0"
+  }
+}

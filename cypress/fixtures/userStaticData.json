@@ -1,0 +1,10 @@
+{
+  "dateOfBirth": "1994-11-12",
+  "street": "Wallaby way 42",
+  "postalCode": "4300",
+  "city": "Sydney",
+  "state": "New South Wales",
+  "country": "Australia",
+  "phone": "123456789",
+  "password": "TestCypress.1234"
+}
