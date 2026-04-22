@@ -7,9 +7,7 @@
 
 
 ##  Objetivo 
-El proyecto cubre distintas dimensiones de calidad para asegurar robustez del sistema.
-
-Este proyecto tiene como objetivo demostrar la capacidad de diseñar y automatizar pruebas end-to-end sobre una aplicación e-commerce, cubriendo no solo el flujo funcional principal, sino también aspectos clave de calidad como resiliencia, seguridad, accesibilidad y consistencia de datos entre API y UI.
+El proyecto busca cubrir distintas dimensiones de calidad, fuera de solamente el diseño de pruebas funcionales, con la finalidad tambien de medir la robustez del sistema sobre una aplicación e-commerce, incluyendo aspectos clave de calidad como resiliencia, seguridad, accesibilidad, consistencia de datos entre API y UI como tambien la automatización de pruebas end-to-end, cubriendo los principales flujos funcionales que necesita el usuario para realizar una compra. 
 
 A través de este enfoque, se busca:
 
@@ -20,66 +18,115 @@ A través de este enfoque, se busca:
 * Identificar vulnerabilidades básicas de seguridad en el frontend
 * Verificar el cumplimiento de estándares de accesibilidad
 
-El proyecto refleja un enfoque de testing orientado a calidad integral, más allá de la simple validación funcional.
+En sintesis, este proyecto refleja un enfoque de testing orientado a calidad integral.
 
-## Tecnologías
+## Stack
 
 | Cypress | JavaScript | GitHub Actions | Axe | Ubuntu |
 |:-------:|:----------:|:--------------:|:---:|:------:|
 | <a href="https://www.cypress.io" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/tandpfun/skill-icons/65dea6c4eaca7da319e552c09f4cf5a9a8dab2c8/icons/Cypress-Light.svg" alt="cypress" width="40" height="40"/></a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/></a> | <a href="https://github.com/features/actions" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/tandpfun/skill-icons/65dea6c4eaca7da319e552c09f4cf5a9a8dab2c8/icons/GithubActions-Light.svg" alt="github actions" width="40" height="40"/></a> | <a href="https://www.deque.com/axe/" target="_blank" rel="noreferrer"><img src="https://deque-systems.gallerycdn.vsassets.io/extensions/deque-systems/vscode-axe-linter/4.11.0/1768840736983/Microsoft.VisualStudio.Services.Icons.Default" alt="axe" width="40" height="40"/></a> | <a href="https://ubuntu.com" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/tandpfun/skill-icons/65dea6c4eaca7da319e552c09f4cf5a9a8dab2c8/icons/Ubuntu-Light.svg" alt="ubuntu" width="40" height="40"/></a> |
 
+| Herramienta | Uso |
+| Faker.js | Generación de datos aleatorios |
+| cy.intercept() | Mocking de red y control de API |
+| axe-core | Auditoría de accesibilidad WCAG |
 
+# 🧪 QA Test Suite — Cypress E2E
 
-## Cobertura de los tests 
+Suite de pruebas automatizadas end-to-end construida con **Cypress**, diseñada para cubrir los aspectos más críticos de una aplicación de e-commerce: flujos de usuario, integridad de datos, resiliencia, seguridad y accesibilidad.
 
-### Smoke Test (de Flujos Crítico )
+---
 
-Validación end-to-end del recorrido principal del usuario:
+## 🗂️ Estructura de tests
 
-Registro de usuario (datos estáticos + Faker)
-Búsqueda de producto
-Agregado al carrito
-Login
-Checkout completo
-Validación de datos en perfil
+### 🔥 Smoke Test — Flujos Críticos
 
-✔ Valor: asegura que el flujo principal de compra funciona correctamente de punta a punta.
+> *Si algo falla aquí, nada más importa.*
 
-### Consistencia API + UI
-Comparación de datos entre API y UI
-Validación de estados vacíos (“sin productos”)
+Validación end-to-end del recorrido principal del usuario, asegurando que el flujo de compra completo funcione de punta a punta en todo momento.
 
-✔ Valor: garantiza integridad entre backend y frontend.
+**Cubre:**
+- Registro de usuario con datos estáticos y datos aleatorios generados con **Faker**
+- Búsqueda de producto y agregado al carrito
+- Checkout completo con login
+- Verificación del perfil para confirmar que los datos del usuario registrado coinciden correctamente
 
-### Mocking & Control del Backend
+Este test es la primera línea de defensa: si el flujo principal de compra está roto, el usuario no puede usar el producto.
 
-Uso de cy.intercept() para simular escenarios dinámicos:
+---
 
-Cambios de precio en tiempo real
-Manipulación de respuestas de API
+### 🔗 Consistencia API + UI
 
-✔ Valor: permite testear escenarios difíciles de reproducir y reduce dependencia del backend.
+> *Lo que el backend devuelve debe ser exactamente lo que el usuario ve.*
 
-### Resiliencia (Manejo de errores)
-Simulación de caída de red
-Manejo de errores HTTP (500 / 404)
-Validación de mensajes amigables para el usuario
+Valida que los datos mostrados en la interfaz sean consistentes con los que expone la API, evitando discrepancias silenciosas entre el frontend y el backend.
 
-✔ Valor: asegura estabilidad ante fallos reales.
+**Cubre:**
+- Comparación directa de datos entre respuestas de API y elementos renderizados en UI
+- Validación de estados vacíos (ej: pantalla "sin productos")
 
-### Seguridad
-Validación de cabeceras HTTP (CSP, X-Frame-Options)
-Simulación de ataque de fuerza bruta (detección de falta de rate limiting)
-Verificación de no exposición de datos sensibles
+Una UI que muestra datos incorrectos es tan peligrosa como un bug funcional — este test lo detecta antes de que llegue a producción.
 
-✔ Valor: detección temprana de vulnerabilidades comunes.
+---
 
-### Accesibilidad 
-Escaneo automático (WCAG 2.1 AA)
-Navegación por teclado
-Validación de foco visible
+### 🎭 Mocking & Control del Backend
 
-✔ Valor: mejora la experiencia de usuario y cumple buenas prácticas.
+> *No esperamos que el backend falle — lo hacemos fallar nosotros primero.*
+
+Usando `cy.intercept()`, se interceptan y manipulan las respuestas de la API para simular escenarios dinámicos que serían difíciles o imposibles de reproducir en un entorno real.
+
+**Cubre:**
+- Simulación de cambios de precio en tiempo real
+- Manipulación de respuestas de API para forzar estados específicos
+
+Esto permite testear comportamientos edge-case sin depender del estado del backend, acelerando el ciclo de QA y haciendo los tests más deterministas.
+
+---
+
+### 💥 Resiliencia — Manejo de Errores
+
+> *Una app de calidad no solo funciona cuando todo va bien.*
+
+Se simulan condiciones adversas para verificar que la aplicación responde de forma controlada y comunica los errores de manera clara al usuario.
+
+**Cubre:**
+- Simulación de caída de red
+- Manejo de errores HTTP `500` (error de servidor) y `404` (recurso no encontrado)
+- Verificación de mensajes de error amigables para el usuario final
+
+La estabilidad ante fallos reales es lo que diferencia una app robusta de una frágil. Estos tests aseguran que los errores no se conviertan en experiencias destructivas para el usuario.
+
+---
+
+### 🔐 Seguridad
+
+> *Las vulnerabilidades más comunes son también las más evitables.*
+
+Se validan aspectos de seguridad básicos pero críticos que suelen pasarse por alto en el testing funcional.
+
+**Cubre:**
+- Validación de cabeceras HTTP de seguridad (`Content-Security-Policy`, `X-Frame-Options`)
+- Simulación de ataque de fuerza bruta para detectar ausencia de rate limiting
+- Verificación de que datos sensibles no queden expuestos en respuestas o en el DOM
+
+La detección temprana de vulnerabilidades en el ciclo de desarrollo es exponencialmente más barata que corregirlas en producción.
+
+---
+
+### ♿ Accesibilidad
+
+> *Una interfaz que no todos pueden usar, no está terminada.*
+
+Se valida el cumplimiento de estándares de accesibilidad web para garantizar que la aplicación sea usable por la mayor cantidad de personas posible.
+
+**Cubre:**
+- Escaneo automático de violaciones **WCAG 2.1 AA**
+- Validación de navegación completa por teclado
+- Verificación de foco visible en elementos interactivos
+
+La accesibilidad no es un extra — es un requisito de calidad. Estos tests ayudan a que el producto cumpla buenas prácticas desde las primeras etapas del desarrollo.
+
+---
 
 
 
