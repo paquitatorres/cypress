@@ -26,10 +26,10 @@ En sintesis, este proyecto refleja un enfoque de testing orientado a calidad int
 |:-------:|:----------:|:--------------:|:---:|:------:|
 | <a href="https://www.cypress.io" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/tandpfun/skill-icons/65dea6c4eaca7da319e552c09f4cf5a9a8dab2c8/icons/Cypress-Light.svg" alt="cypress" width="40" height="40"/></a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/></a> | <a href="https://github.com/features/actions" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/tandpfun/skill-icons/65dea6c4eaca7da319e552c09f4cf5a9a8dab2c8/icons/GithubActions-Light.svg" alt="github actions" width="40" height="40"/></a> | <a href="https://www.deque.com/axe/" target="_blank" rel="noreferrer"><img src="https://deque-systems.gallerycdn.vsassets.io/extensions/deque-systems/vscode-axe-linter/4.11.0/1768840736983/Microsoft.VisualStudio.Services.Icons.Default" alt="axe" width="40" height="40"/></a> | <a href="https://ubuntu.com" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/tandpfun/skill-icons/65dea6c4eaca7da319e552c09f4cf5a9a8dab2c8/icons/Ubuntu-Light.svg" alt="ubuntu" width="40" height="40"/></a> |
 
-| Herramienta | Uso |
-| Faker.js | Generación de datos aleatorios |
-| cy.intercept() | Mocking de red y control de API |
-| axe-core | Auditoría de accesibilidad WCAG |
+
+- **Faker** | Generación de datos aleatorios.
+- **cy.intercept()** | Mocking de red y control de API. 
+- **axe-core** | Auditoría de accesibilidad WCAG.
 
 # 🧪 QA Test Suite — Cypress E2E
 
@@ -132,49 +132,43 @@ La accesibilidad no es un extra — es un requisito de calidad. Estos tests ayud
 
 ## ▶️ Instalación y ejecución
 
-npm install
+`npm install`
 
-npx cypress open
+`npx cypress open`
+
 
 Modo headless:
 
-npx cypress run
 
-### 📊 Reportes
+`npx cypress run`
 
-Los tests generan reportes HTML utilizando Mochawesome.
+### Generacion de Reportes HTML utilizando Mochawesome.
 
-npm run test
-npm run report
+`npm run test`
+
+`npm run report`
 
 
-### Integración continua (CI)
+## Integración continua (CI)
 
-El proyecto incluye un workflow configurado en .github/workflows/cypress-tests.yml que:
+El proyecto incluye un workflow configurado en `.github/workflows/cypress-tests.yml` que permite ejecutarse automáticamente con GitHub Actions:
 
-Ejecuta todas las pruebas en cada push a main.
+- Ejecución de tests en cada push y los dias jueves a las 15hs (ARG). 
+- Generación de reportes
 
-Genera el reporte HTML y lo adjunta como artefacto descargable.
-
-Publica los hallazgos de seguridad en un archivo security-issues.json.
-
-El proyecto puede ejecutarse automáticamente con GitHub Actions:
-
-Ejecución de tests en cada push
-Generación de reportes
-Publicación de resultados como artifacts
 
 
 ## Notas de QA y Mejores Prácticas
+
 Page Objects: Separación de localizadores y acciones en support/pages/.
 
-Generación de datos: Uso de @faker-js/faker combinado con fixtures estáticos.
+Generación de datos: Uso de` @faker-js/faker` combinado con fixtures estáticos.
 
-Comandos personalizados: cy.tabUntil(), cy.checkAccessibility(), cy.loginViaApi().
+Comandos personalizados: `cy.tabUntil()`, `cy.checkAccessibility()`, `cy.loginViaApi()`.
 
 Pruebas no felices: Se documentan vulnerabilidades con throw new Error para visibilizarlas en reportes.
 
-Esperas deterministas: Eliminación de cy.wait() por aserciones sobre UI (should('be.visible')).
+Esperas deterministas: Eliminación de cy.wait() por aserciones sobre UI (`should('be.visible'`)).
 
 
 
