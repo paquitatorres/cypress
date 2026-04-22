@@ -45,13 +45,13 @@ Validación de datos en perfil
 
 ✔ Valor: asegura que el flujo principal de compra funciona correctamente de punta a punta.
 
-🔗 Consistencia API + UI
+### Consistencia API + UI
 Comparación de datos entre API y UI
 Validación de estados vacíos (“sin productos”)
 
 ✔ Valor: garantiza integridad entre backend y frontend.
 
-🎭 Mocking & Control del Backend
+### Mocking & Control del Backend
 
 Uso de cy.intercept() para simular escenarios dinámicos:
 
@@ -60,21 +60,21 @@ Manipulación de respuestas de API
 
 ✔ Valor: permite testear escenarios difíciles de reproducir y reduce dependencia del backend.
 
-🛡️ Resiliencia (Manejo de errores)
+### Resiliencia (Manejo de errores)
 Simulación de caída de red
 Manejo de errores HTTP (500 / 404)
 Validación de mensajes amigables para el usuario
 
 ✔ Valor: asegura estabilidad ante fallos reales.
 
-🔒 Seguridad
+### Seguridad
 Validación de cabeceras HTTP (CSP, X-Frame-Options)
 Simulación de ataque de fuerza bruta (detección de falta de rate limiting)
 Verificación de no exposición de datos sensibles
 
 ✔ Valor: detección temprana de vulnerabilidades comunes.
 
-♿ Accesibilidad 
+### Accesibilidad 
 Escaneo automático (WCAG 2.1 AA)
 Navegación por teclado
 Validación de foco visible
@@ -83,24 +83,25 @@ Validación de foco visible
 
 
 
-▶️ Instalación y ejecución
+## ▶️ Instalación y ejecución
+
 npm install
+
 npx cypress open
 
 Modo headless:
 
 npx cypress run
-📊 Reportes
+
+### 📊 Reportes
 
 Los tests generan reportes HTML utilizando Mochawesome.
 
 npm run test
 npm run report
 
-Los reportes pueden integrarse con CI (GitHub Actions) como artifacts descargables.
 
-
-Integración continua (CI)
+### Integración continua (CI)
 
 El proyecto incluye un workflow configurado en .github/workflows/cypress-tests.yml que:
 
@@ -115,6 +116,19 @@ El proyecto puede ejecutarse automáticamente con GitHub Actions:
 Ejecución de tests en cada push
 Generación de reportes
 Publicación de resultados como artifacts
+
+
+## Notas de QA y Mejores Prácticas
+Page Objects: Separación de localizadores y acciones en support/pages/.
+
+Generación de datos: Uso de @faker-js/faker combinado con fixtures estáticos.
+
+Comandos personalizados: cy.tabUntil(), cy.checkAccessibility(), cy.loginViaApi().
+
+Pruebas no felices: Se documentan vulnerabilidades con throw new Error para visibilizarlas en reportes.
+
+Esperas deterministas: Eliminación de cy.wait() por aserciones sobre UI (should('be.visible')).
+
 
 
 
