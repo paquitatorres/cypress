@@ -36,6 +36,10 @@ static get countryInput(){
     return cy.get('[data-test="country"]');
 }
 
+static get numberHouseInput() {
+    return cy.get('[data-test="house_number"]')
+}
+
 static get postalCodeInput(){
     return cy.get('[data-test="postal_code"]');
 }
@@ -109,6 +113,7 @@ static fillShippingAddress(user) {
     if (user.state) this.stateInput.type(user.state);
     if (user.country) this.countryInput.type(user.country);
     if (user.postalCode) this.postalCodeInput.type(user.postalCode);
+    if (user.numberHouse) this.numberHouseInput.type(user.numberHouse);
     return this;
 }
 

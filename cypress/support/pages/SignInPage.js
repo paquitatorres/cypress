@@ -1,5 +1,18 @@
 export class SignInPage {
 
+
+   static get emailLoginInput() {
+      return cy.get('[data-test="email"]');
+   }
+
+   static get passwordLoginInput() {
+      return cy.get('[data-test="password"]');
+   }
+
+  static get loginButton() {
+      return cy.get('[data-test="login-submit"]');
+   }
+
    static get registerButton() {
       return cy.get('[data-test="register-link"]');
    }
@@ -50,6 +63,9 @@ export class SignInPage {
       return cy.get('[data-test="password"]');
    }
 
+   static get NumberHouseInput() {
+      return cy.get('[data-test="house_number"]')
+   }
 
    static get submitButton() {
       return cy.get('[data-test="register-submit"]');
@@ -78,6 +94,7 @@ export class SignInPage {
         if (user.phone) this.phoneInput.type(user.phone);
         if (user.email) this.emailInput.type(user.email);
         if (user.password) this.passwordInput.type(user.password);
+        if (user.numberHouse) this.NumberHouseInput.type(user.numberHouse);
          return this; // Permite encadenar como: fillForm(user).submit()
 }
 
@@ -87,6 +104,12 @@ export class SignInPage {
 
       static registerNewUser(user) {
         return this.fillRegistrationForm(user).submitRegistration();
+    }
+
+    static login(user) {
+        if (user.email) this.emailLoginInput.type(user.email);
+        if (user.password) this.passwordLoginInput.type(user.password);
+        return this.loginButton.click();
     }
 
 }

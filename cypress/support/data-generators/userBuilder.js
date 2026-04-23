@@ -18,6 +18,7 @@ export function generateNewUser() {
         postalCode: staticUserData.postalCode,
         country: staticUserData.country,
         phone: staticUserData.phone,
+        numberHouse: staticUserData.numberHouse,
         password: staticUserData.password
 
     };

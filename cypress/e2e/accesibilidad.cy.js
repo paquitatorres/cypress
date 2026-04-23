@@ -62,7 +62,7 @@ it('Debe poder buscar un producto usando solo teclado', () => {
     cy.focused().then($el => { const outline = window.getComputedStyle($el[0]).outline;
        expect(outline).to.not.match(/none|0px/); });
 
-  cy.log('El indicador de foco es visible - Buenas prácticas de accesibilidad');
+  cy.log('El indicador de foco es visible - Buena práctica de accesibilidad');
 });
 
 

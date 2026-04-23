@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "test": "cypress run",
+  "report:generate": "npx marge cypress/reports/mochawesome.json --reportDir cypress/reports/html --inline",
+  "report": "npm run report:generate"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -16,6 +18,9 @@
     "cypress": "^15.13.1",
     "cypress-axe": "^1.7.0",
     "cypress-plugin-tab": "^2.0.0",
-    "cypress-real-events": "^1.15.0"
+    "cypress-real-events": "^1.15.0",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.1.1",
+    "mochawesome-report-generator": "^6.3.2"
   }
 }
