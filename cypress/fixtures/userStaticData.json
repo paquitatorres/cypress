@@ -5,6 +5,7 @@
   "city": "Sydney",
   "state": "New South Wales",
   "country": "Australia",
+  "numberHouse": "42",
   "phone": "123456789",
   "password": "TestCypress.1234"
 }

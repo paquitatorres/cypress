@@ -12,7 +12,9 @@ export class MenuHeader {
       return cy.get('[data-test="nav-menu"]')
    }
 
-
+   static get perfilInfo() {
+      return cy.get('[data-test="nav-my-profile"]');
+   }
 
 
 //methods
@@ -27,6 +29,7 @@ export class MenuHeader {
 
    static goToProfilePage() {
       this.profileButton.click();
+      this.perfilInfo.click();
    }
 
 

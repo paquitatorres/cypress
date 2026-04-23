@@ -17,12 +17,13 @@ describe('Prueba e2e:  Crear un usuario desde cero con datos estaticos y dinamic
     MenuHeader.goToSignInPage(); 
     SignInPage.clickRegisterLink();
     SignInPage.fillRegistrationForm(usuario); 
+   
     SignInPage.submitRegistration();
  })
 
   it('Realizar una compra con los datos del usuario creado', () => {
     // Verificar el before de registro fue exitoso 
-     cy.url().should('include', '/auth/login');
+      cy.url().should('include', 'auth/login');
        MenuHeader.signInButton.should('be.visible'); 
 
     // Realizar una búsqueda de un producto 
@@ -51,6 +52,10 @@ describe('Prueba e2e:  Crear un usuario desde cero con datos estaticos y dinamic
 
 
    it('Revisar los datos del perfil coincidan con los datos del usuario creado', () => { 
+        cy.visit('/');
+         MenuHeader.goToSignInPage();
+         SignInPage.login(usuario);
+
 
     MenuHeader.profileButton.should('be.visible');
     MenuHeader.goToProfilePage();

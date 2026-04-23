@@ -1,0 +1,30 @@
+name: Cypress Tests
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '0 18 * * 4'  
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Cypress
+        run: npx cypress run
+
+      - name: Generate Report
+        run: npm run report
+
+      - name: Upload Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-report
+          path: cypress/reports

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 describe(' Resiliencia: Errores HTTP', () => {
+=======
+describe('Resiliencia: Errores HTTP', () => {
+>>>>>>> 64c9728 (feat: correccion  tests)
   const productId = '01KPD3V4CZ2BNHDNWNVWZ82ST0'; // Combination Pliers
 
 
