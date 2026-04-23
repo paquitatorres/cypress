@@ -1,0 +1,201 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-04-21T08:59:05.718Z",
+    "end": "2026-04-21T08:59:13.475Z",
+    "duration": 7757,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "7e293a7f-e0f3-4078-8b3c-6abb51238e37",
+      "title": "",
+      "fullFile": "cypress\\e2e\\accesibilidad.cy.js",
+      "file": "cypress\\e2e\\accesibilidad.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "0792a1ce-ff31-4c31-a019-11ae7b4de9c3",
+          "title": "Pruebas de Accesibilidad Básicas",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "El home no debería tener violaciones críticas",
+              "fullTitle": "Pruebas de Accesibilidad Básicas El home no debería tener violaciones críticas",
+              "timedOut": null,
+              "duration": 2284,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/');\ncy.checkCriticalAccessibility();\ncy.log(' Análisis de accesibilidad completado para el home');",
+              "err": {},
+              "uuid": "c395d516-0752-424b-a5ee-76e15092fe7b",
+              "parentUUID": "0792a1ce-ff31-4c31-a019-11ae7b4de9c3",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "La pagina de contacto debería ser accesible",
+              "fullTitle": "Pruebas de Accesibilidad Básicas La pagina de contacto debería ser accesible",
+              "timedOut": null,
+              "duration": 1524,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/contact');\ncy.get('.auth-form form').should('be.visible');\n//analzo el formulario \ncy.checkAccessibility('.auth-form form');\ncy.log(' Análisis de accesibilidad completado para el formulario de contacto');",
+              "err": {},
+              "uuid": "a351cf4c-bb08-4dfd-bd62-6f8198e98952",
+              "parentUUID": "0792a1ce-ff31-4c31-a019-11ae7b4de9c3",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c395d516-0752-424b-a5ee-76e15092fe7b",
+            "a351cf4c-bb08-4dfd-bd62-6f8198e98952"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3808,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "d9cfa8d5-1c04-4081-894a-9d528e93b090",
+          "title": "Navegación usando el teclado en el home",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Debe permitir navegar hasta Contact usando tab y activarlo con enter",
+              "fullTitle": "Navegación usando el teclado en el home Debe permitir navegar hasta Contact usando tab y activarlo con enter",
+              "timedOut": null,
+              "duration": 888,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('body').focus();\n// tab hasta que lo encuentre \ncy.tabUntil('[data-test=\"nav-contact\"]');\ncy.focused().should('have.attr', 'data-test', 'nav-contact').realPress('Enter');\n;\ncy.url().should('include', '/contact');\ncy.get('.auth-form').should('be.visible');\ncy.log('Navegación por teclado hasta Contact fue exitosa');",
+              "err": {},
+              "uuid": "0b17c00a-f907-451e-a72d-68d6437d67d0",
+              "parentUUID": "d9cfa8d5-1c04-4081-894a-9d528e93b090",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Debe poder buscar un producto usando solo teclado",
+              "fullTitle": "Navegación usando el teclado en el home Debe poder buscar un producto usando solo teclado",
+              "timedOut": null,
+              "duration": 2073,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('body').focus();\ncy.tabUntil('[data-test=\"search-query\"]');\ncy.focused().should('have.attr', 'data-test', 'search-query').type('plier');\ncy.realPress('Enter');\ncy.get('[data-test=\"product-name\"]').should('have.length.greaterThan', 0);\ncy.log('Búsqueda por teclado completada exitosamente');",
+              "err": {},
+              "uuid": "a7c01016-c200-4bbc-a8bc-6c4ecb7254b2",
+              "parentUUID": "d9cfa8d5-1c04-4081-894a-9d528e93b090",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "El foco debe ser visible en todo momento (indicador de accesibilidad)",
+              "fullTitle": "Navegación usando el teclado en el home El foco debe ser visible en todo momento (indicador de accesibilidad)",
+              "timedOut": null,
+              "duration": 705,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('body').focus();\ncy.tab();\ncy.focused().then($el => {\n  const outline = window.getComputedStyle($el[0]).outline;\n  expect(outline).to.not.match(/none|0px/);\n});\ncy.log('El indicador de foco es visible - Buena práctica de accesibilidad');",
+              "err": {},
+              "uuid": "8163fd18-8fb6-4dde-8071-aa35d1927ee2",
+              "parentUUID": "d9cfa8d5-1c04-4081-894a-9d528e93b090",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "0b17c00a-f907-451e-a72d-68d6437d67d0",
+            "a7c01016-c200-4bbc-a8bc-6c4ecb7254b2",
+            "8163fd18-8fb6-4dde-8071-aa35d1927ee2"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3666,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}

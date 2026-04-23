@@ -1,0 +1,124 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-04-21T08:59:30.211Z",
+    "end": "2026-04-21T08:59:34.190Z",
+    "duration": 3979,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "2a2dfc2e-5aca-4712-a281-3376cd3a3a41",
+      "title": "",
+      "fullFile": "cypress\\e2e\\products-list.cy.js",
+      "file": "cypress\\e2e\\products-list.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "1178ecfa-bdb5-4c2a-8e8d-7aa1772731e0",
+          "title": "Sincronización de Lista de Productos de API con UI",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": " Verificar que la UI muestra los productos que recibe del backend",
+              "fullTitle": "Sincronización de Lista de Productos de API con UI  Verificar que la UI muestra los productos que recibe del backend",
+              "timedOut": null,
+              "duration": 2945,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Intercepto la llamada que hace la UI hace para cargar productos..La app hace una petición : /products?page=1&per_page=9\ncy.intercept('GET', '**/products?page=*').as('getProducts');\n// Visitar la página y esperar a que la llamada ocurra.\ncy.visit('/');\ncy.wait('@getProducts').then(interception => {\n  // Los datos que el backend envió a la UI.\n  const apiProducts = interception.response.body.data;\n  const apiCount = apiProducts.length;\n  const firstNameInApi = apiProducts[0].name;\n  cy.log(`Backend envió ${apiCount} productos. El primero es \"${firstNameInApi}\"`);\n  // Veo cuantos sonlos productos visibles en la UI y verificar el primero.\n  cy.get('[data-test=\"product-name\"]').should('have.length', apiCount).first().should('contain', firstNameInApi);\n  cy.log('La UI muestra correctamente la lista de productos sincronizada con el backend');\n});",
+              "err": {},
+              "uuid": "07bed233-217f-4dc3-9afe-2b076f3c0b86",
+              "parentUUID": "1178ecfa-bdb5-4c2a-8e8d-7aa1772731e0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Simula una respuesta vacía y verifica mensaje de \"sin productos\"",
+              "fullTitle": "Sincronización de Lista de Productos de API con UI Simula una respuesta vacía y verifica mensaje de \"sin productos\"",
+              "timedOut": null,
+              "duration": 885,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Intercepto y fuerzo una respuesta vacía.\ncy.intercept('GET', '**/products?page=*', {\n  statusCode: 200,\n  body: {\n    data: []\n  }\n}).as('emptyProducts');\ncy.visit('/');\ncy.wait('@emptyProducts');\n// Verificamos que aparece el mensaje esperado y no hay productos.\ncy.get('[data-test=\"no-results\"]').should('be.visible');\ncy.log('La UI maneja correctamente el estado de catálogo vacío');",
+              "err": {},
+              "uuid": "6d0bf95c-102b-4708-b49f-a52d7b4b9f97",
+              "parentUUID": "1178ecfa-bdb5-4c2a-8e8d-7aa1772731e0",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "07bed233-217f-4dc3-9afe-2b076f3c0b86",
+            "6d0bf95c-102b-4708-b49f-a52d7b4b9f97"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3830,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}

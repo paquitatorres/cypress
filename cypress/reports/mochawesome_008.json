@@ -1,0 +1,221 @@
+{
+  "stats": {
+    "suites": 4,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-04-21T09:00:39.307Z",
+    "end": "2026-04-21T09:00:55.537Z",
+    "duration": 16230,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "b65e99c7-5b69-453e-9048-64c16618a6d2",
+      "title": "",
+      "fullFile": "cypress\\e2e\\security\\sensitive-data-exposure.cy.js",
+      "file": "cypress\\e2e\\security\\sensitive-data-exposure.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "218912e5-af29-492c-b5a9-ed680f5d37e4",
+          "title": "Exposición de Datos Sensibles en URLs",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "bee1c3d4-3400-4547-900a-5a8415f8609b",
+              "title": "Con credenciales inválidas",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "No debe exponer datos sensibles en ninguna URL del flujo de error",
+                  "fullTitle": "Exposición de Datos Sensibles en URLs Con credenciales inválidas No debe exponer datos sensibles en ninguna URL del flujo de error",
+                  "timedOut": null,
+                  "duration": 4164,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const interceptedUrls = [];\ncy.intercept('**/*', req => {\n  interceptedUrls.push(req.url);\n}).as('allRequests');\ncy.visit('/');\ncy.get('[data-test=\"nav-sign-in\"]').click();\ncy.get('[data-test=\"email\"]').type(credentials.invalidUser.email);\ncy.get('[data-test=\"password\"]').type(credentials.invalidUser.password);\ncy.get('[data-test=\"login-submit\"]').click();\ncy.contains('Invalid email or password', {\n  timeout: 5000\n}).should('be.visible');\ncy.url().then(url => assertNoSensitiveDataInUrl(url, 'Browser URL post-error'));\ncy.then(() => interceptedUrls.forEach(url => assertNoSensitiveDataInUrl(url, 'Network request')));",
+                  "err": {},
+                  "uuid": "d9350443-5b8e-4374-8bb7-eb565ad9fb71",
+                  "parentUUID": "bee1c3d4-3400-4547-900a-5a8415f8609b",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "d9350443-5b8e-4374-8bb7-eb565ad9fb71"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 4164,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "d2c212fb-a179-45c3-a101-8abb16739b61",
+              "title": "Con credenciales válidas",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "No debe exponer el token de sesión real en ninguna URL",
+                  "fullTitle": "Exposición de Datos Sensibles en URLs Con credenciales válidas No debe exponer el token de sesión real en ninguna URL",
+                  "timedOut": null,
+                  "duration": 3288,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const interceptedRequests = [];\ncy.intercept('**/*', req => {\n  interceptedRequests.push({\n    url: req.url,\n    method: req.method\n  });\n}).as('allRequests');\ncy.visit('/');\ncy.get('[data-test=\"nav-sign-in\"]').click();\ncy.get('[data-test=\"email\"]').type(credentials.validUser.email);\ncy.get('[data-test=\"password\"]').type(credentials.validUser.password);\ncy.get('[data-test=\"login-submit\"]').click();\n// Verificación de login exitoso\ncy.get('[data-test=\"nav-sign-in\"]', {\n  timeout: 8000\n}).should('not.exist');\n// Verifica URL del browser post-login\ncy.url().then(url => {\n  assertNoSensitiveDataInUrl(url, 'Browser URL post-login');\n});\n// Verifica todas las requests de red\ncy.then(() => {\n  interceptedRequests.forEach(({\n    url,\n    method\n  }) => {\n    assertNoSensitiveDataInUrl(url, `${method} request`);\n  });\n  cy.log(`✅ ${interceptedRequests.length} requests verificadas (credenciales válidas)`);\n});",
+                  "err": {},
+                  "uuid": "5488ce28-29b2-4153-8bc6-67315fbab528",
+                  "parentUUID": "d2c212fb-a179-45c3-a101-8abb16739b61",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "El token no debe aparecer al navegar hacia atrás en el historial",
+                  "fullTitle": "Exposición de Datos Sensibles en URLs Con credenciales válidas El token no debe aparecer al navegar hacia atrás en el historial",
+                  "timedOut": null,
+                  "duration": 5370,
+                  "state": "passed",
+                  "speed": "medium",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.visit('/');\ncy.get('[data-test=\"nav-sign-in\"]').click();\ncy.get('[data-test=\"email\"]').type(credentials.validUser.email);\ncy.get('[data-test=\"password\"]').type(credentials.validUser.password);\ncy.get('[data-test=\"login-submit\"]').click();\ncy.get('[data-test=\"nav-sign-in\"]', {\n  timeout: 8000\n}).should('not.exist');\ncy.go('back');\ncy.url().then(url => {\n  assertNoSensitiveDataInUrl(url, 'URL al navegar hacia atrás');\n});",
+                  "err": {},
+                  "uuid": "4cae3dbe-132a-4072-b7ee-7ff725aac9cc",
+                  "parentUUID": "d2c212fb-a179-45c3-a101-8abb16739b61",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "5488ce28-29b2-4153-8bc6-67315fbab528",
+                "4cae3dbe-132a-4072-b7ee-7ff725aac9cc"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 8658,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "6b5081ef-5968-48ed-a72c-8ad997bd2cab",
+              "title": "Headers de respuesta",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "La respuesta de login no debe devolver token en headers inseguros",
+                  "fullTitle": "Exposición de Datos Sensibles en URLs Headers de respuesta La respuesta de login no debe devolver token en headers inseguros",
+                  "timedOut": null,
+                  "duration": 3051,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const DANGEROUS_HEADERS = ['x-token', 'x-auth', 'x-access-token'];\ncy.intercept('POST', '**/users/login', req => {\n  req.continue(res => {\n    DANGEROUS_HEADERS.forEach(header => {\n      expect(res.headers, `Header inseguro encontrado: ${header}`).to.not.have.property(header);\n    });\n  });\n}).as('loginRequest');\ncy.visit('/');\ncy.get('[data-test=\"nav-sign-in\"]').click();\ncy.get('[data-test=\"email\"]').type(credentials.validUser.email);\ncy.get('[data-test=\"password\"]').type(credentials.validUser.password);\ncy.get('[data-test=\"login-submit\"]').click();\ncy.wait('@loginRequest');\ncy.log(' Headers de respuesta verificados');",
+                  "err": {},
+                  "uuid": "0aff5825-4749-45f3-95d5-13b75b1bad28",
+                  "parentUUID": "6b5081ef-5968-48ed-a72c-8ad997bd2cab",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "0aff5825-4749-45f3-95d5-13b75b1bad28"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 3051,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}

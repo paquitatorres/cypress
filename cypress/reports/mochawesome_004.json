@@ -1,0 +1,124 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-04-21T09:00:17.232Z",
+    "end": "2026-04-21T09:00:19.629Z",
+    "duration": 2397,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "d6640642-7304-484a-bc4d-599d1f5195ef",
+      "title": "",
+      "fullFile": "cypress\\e2e\\resilience\\ErrorsInHttp.cy.js",
+      "file": "cypress\\e2e\\resilience\\ErrorsInHttp.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "33cd4e87-836c-4061-9371-01db93e078e2",
+          "title": "🧪 Resiliencia: Errores HTTP",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Muestra mensaje de error cuando la API de producto devuelve 500",
+              "fullTitle": "🧪 Resiliencia: Errores HTTP Muestra mensaje de error cuando la API de producto devuelve 500",
+              "timedOut": null,
+              "duration": 1707,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.intercept('GET', `**/products/${productId}`, {\n  statusCode: 500,\n  body: {\n    message: 'Internal Server Error'\n  }\n}).as('getProductError');\ncy.visit(`/product/${productId}`);\ncy.wait('@getProductError');\n// Verificar mensaje de error pero la aplicacion no tiene parece un mensaje de error especifico\n//cy.contains('Error').should('be.visible');\n// Verificar que no se muestra el precio (indica que no cargó)\ncy.get('[data-test=\"unit-price\"]').should('not.exist');\ncy.log(' La UI manejó correctamente un error 500 del servidor');",
+              "err": {},
+              "uuid": "2f347573-9cbc-40f2-bdff-d74fda8d7d47",
+              "parentUUID": "33cd4e87-836c-4061-9371-01db93e078e2",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "(404) cuando se manda una solicitud para un producto inexistente",
+              "fullTitle": "🧪 Resiliencia: Errores HTTP (404) cuando se manda una solicitud para un producto inexistente",
+              "timedOut": null,
+              "duration": 562,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const fakeId = 'producto-inexistente-12345';\ncy.intercept('GET', `**/products/${fakeId}`, {\n  statusCode: 404,\n  body: {\n    message: 'Product not found'\n  }\n}).as('getProduct404');\ncy.visit(`/product/${fakeId}`);\ncy.wait('@getProduct404');\n// Verificar que aparece mensaje de no encontrado o redirección\n// cy.contains('not found').should('be.visible');\n// cy.get('[data-test=\"unit-price\"]').should('not.exist');\ncy.log(' La UI manejó correctamente un error 404');",
+              "err": {},
+              "uuid": "dc7d8205-fed0-46ea-8bdc-4b3a3d539436",
+              "parentUUID": "33cd4e87-836c-4061-9371-01db93e078e2",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "2f347573-9cbc-40f2-bdff-d74fda8d7d47",
+            "dc7d8205-fed0-46ea-8bdc-4b3a3d539436"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2269,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}
