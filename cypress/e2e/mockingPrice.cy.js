@@ -41,5 +41,8 @@ describe('Mocking de Cambio de Precio en Tiempo Real', () => {
 
 });
   
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 39bdc8826f7e3ed9d75407b0e46a2002d4a35005
