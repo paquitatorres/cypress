@@ -26,7 +26,7 @@ describe('Mocking de Cambio de Precio en Tiempo Real', () => {
     cy.visit(`/product/${productId}`);
     cy.wait('@getProduct');
     cy.get('[data-test="unit-price"]').should('contain', '14.15');
-    cy.log('💰 Precio normal mostrado: $14.15');
+    cy.log(' Precio normal mostrado: $14.15');
 
     // Simulacion de recarga 
     cy.reload();
