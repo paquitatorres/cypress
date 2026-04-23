@@ -1,4 +1,4 @@
-describe('🧪 Resiliencia: Errores HTTP', () => {
+describe(' Resiliencia: Errores HTTP', () => {
   const productId = '01KPD3V4CZ2BNHDNWNVWZ82ST0'; // Combination Pliers
 
 
