@@ -160,8 +160,7 @@ El proyecto incluye un workflow configurado en `.github/workflows/cypress-tests.
 
 ## Notas de QA y Mejores Prácticas
 
-Page Objects: Separación de localizadores y acciones en support/pages/.
-
+**-Page Objects:** Separación de localizadores y acciones 
 Generación de datos: Uso de` @faker-js/faker` combinado con fixtures estáticos.
 
 Comandos personalizados: `cy.tabUntil()`, `cy.checkAccessibility()`, `cy.loginViaApi()`.
