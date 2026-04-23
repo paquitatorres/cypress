@@ -82,7 +82,7 @@ describe('Exposición de Datos Sensibles en URLs', () => {
         interceptedRequests.forEach(({ url, method }) => {
           assertNoSensitiveDataInUrl(url, `${method} request`);
         });
-        cy.log(`✅ ${interceptedRequests.length} requests verificadas (credenciales válidas)`);
+        cy.log(` ${interceptedRequests.length} requests verificadas (credenciales válidas)`);
       });
     });
 
