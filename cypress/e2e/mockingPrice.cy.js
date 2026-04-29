@@ -1,7 +1,7 @@
 describe('Mocking de Cambio de Precio en Tiempo Real', () => {
 
   it('Actualiza el precio del producto cuando el backend envía un cambio de precio', () => {
-    const productId = '01KPTV9K7FGATK5EJXQCAXF49N'; // Combination Pliers (ID)
+    const productId = '01KQCRMW617X5BRW0PQ3Q8VHNF'; // Combination Pliers (ID)
     let requestCount = 0;
 
     // Intercepto la llamada GET del producto
@@ -41,8 +41,3 @@ describe('Mocking de Cambio de Precio en Tiempo Real', () => {
 
 });
   
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 64c9728 (feat: correccion  tests)

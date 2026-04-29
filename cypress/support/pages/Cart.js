@@ -37,7 +37,7 @@ static get countryInput(){
 }
 
 static get numberHouseInput() {
-    return cy.get('[data-test="house_number"]')
+    return cy.get('[data-test="house_number"]');
 }
 
 static get postalCodeInput(){
@@ -111,14 +111,34 @@ static fillShippingAddress(user) {
     if (user.street) this.streetInput.type(user.street);
     if (user.city) this.cityInput.type(user.city);
     if (user.state) this.stateInput.type(user.state);
-    if (user.country) this.countryInput.type(user.country);
+
+    if (user.country) {
+        this.countryInput
+            .invoke('val', user.country)
+            .trigger('input');
+    }
+
     if (user.postalCode) this.postalCodeInput.type(user.postalCode);
-    if (user.numberHouse) this.numberHouseInput.type(user.numberHouse);
+
+    // cy.then() encola esto al final, después de que el DOM termine de actualizarse
+    cy.then(() => {
+        if (user.numberHouse) {
+            this.numberHouseInput
+                .clear()
+                .type(user.numberHouse);
+        }
+    });
+
     return this;
 }
 
-static confirmShippingAddress() {
-   return this.confirmShippingAddressBtn.click();
+static confirmShippingAddress(user) {
+    if (user?.numberHouse) {
+        this.numberHouseInput
+            .clear()
+            .type(user.numberHouse);
+    }
+    return this.confirmShippingAddressBtn.click();
 }
 
 static selectPaymentMethod(method) {

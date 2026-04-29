@@ -38,7 +38,7 @@ describe('Prueba e2e:  Crear un usuario desde cero con datos estaticos y dinamic
       Cart.loginDuringCheckout(usuario);
       Cart.secondStepCheckout();
       Cart.fillShippingAddress(usuario);
-      Cart.confirmShippingAddress();
+      Cart.confirmShippingAddress(usuario);
       Cart.selectPaymentMethod('credit-card');
       Cart.fillCreditCardInfo(cardInfo , usuario);
        Cart.confirmPayment();

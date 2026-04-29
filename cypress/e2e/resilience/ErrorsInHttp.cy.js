@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 describe(' Resiliencia: Errores HTTP', () => {
-=======
-describe('Resiliencia: Errores HTTP', () => {
->>>>>>> 64c9728 (feat: correccion  tests)
+  
   const productId = '01KPD3V4CZ2BNHDNWNVWZ82ST0'; // Combination Pliers
-
-
-
 
   it('Muestra mensaje de error cuando la API de producto devuelve 500', () => {
     cy.intercept('GET', `**/products/${productId}`, {
@@ -26,7 +20,6 @@ describe('Resiliencia: Errores HTTP', () => {
   });
 
 
-  
   it('(404) cuando se manda una solicitud para un producto inexistente', () => {
     const fakeId = 'producto-inexistente-12345';
 
@@ -44,4 +37,5 @@ describe('Resiliencia: Errores HTTP', () => {
 
     cy.log(' La UI manejó correctamente un error 404');
   });
+
 });

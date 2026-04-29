@@ -1,0 +1,18 @@
+[
+  {
+    "endpoint": "products",
+    "missingHeaders": [
+      "X-Frame-Options",
+      "X-Content-Type-Options",
+      "Content-Security-Policy"
+    ]
+  },
+  {
+    "endpoint": "login",
+    "missingHeaders": [
+      "X-Frame-Options",
+      "X-Content-Type-Options",
+      "Content-Security-Policy"
+    ]
+  }
+]
