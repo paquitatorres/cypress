@@ -3,6 +3,8 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = defineConfig({
+  video: false,                    
+  screenshotOnRunFailure: true, 
   reporter: "mochawesome",
   reporterOptions: {
     reportDir: "cypress/reports",

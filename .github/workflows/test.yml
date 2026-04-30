@@ -15,6 +15,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Create required directories
+        run: |
+          mkdir -p cypress/reports
+          mkdir -p cypress/screenshots
+
       - name: Cypress tests
         uses: cypress-io/github-action@v6
         with:
@@ -38,3 +43,5 @@ jobs:
         with:
           name: cypress-screenshots
           path: cypress/screenshots
+          if-no-files-found: ignore  
+          
