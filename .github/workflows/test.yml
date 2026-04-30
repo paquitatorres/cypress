@@ -18,10 +18,8 @@ jobs:
       - name: Cypress tests
         uses: cypress-io/github-action@v6
         with:
-          browser: chrome
-        
-          command: npx cypress run --browser chrome --reporter spec --reporter-options ""
-        continue-on-error: true  
+          command: npx cypress run --browser chrome --reporter spec
+        continue-on-error: true
 
       - name: Generate Report
         if: always()
@@ -40,4 +38,3 @@ jobs:
         with:
           name: cypress-screenshots
           path: cypress/screenshots
-
