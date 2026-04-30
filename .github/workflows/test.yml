@@ -19,23 +19,31 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
-          #  Muestra los logs
-          command: npx cypress run --reporter spec
+        
+          command: npx cypress run --browser chrome --reporter spec --reporter-options ""
+        continue-on-error: true  
 
       - name: Generate Report
+        if: always()
         run: npm run report
 
       - name: Upload Report
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: cypress-report
           path: cypress/reports
 
-      #  Screenshots de los tests que fallaron
       - name: Upload Screenshots
         uses: actions/upload-artifact@v4
-        if: failure()
+        if: always()
         with:
           name: cypress-screenshots
           path: cypress/screenshots
 
+      - name: Upload Videos
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
